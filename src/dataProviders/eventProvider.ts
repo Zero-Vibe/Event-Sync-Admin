@@ -5,6 +5,6 @@ const API_URL = import.meta.env.VITE_JSON_SERVER_URL;
 
 const baseDataProvider = jsonServerProvider(API_URL);
 
-export const roomProvider: DataProvider = {
+export const eventProvider: DataProvider = {
   ...baseDataProvider,
 };

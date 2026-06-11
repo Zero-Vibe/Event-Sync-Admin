@@ -1,10 +1,19 @@
 import jsonServerProvider from "ra-data-json-server";
 import { combineDataProviders, DataProvider } from "react-admin";
-import { roomProvider, sessionProvider } from "./dataProviders/dataProviders";
+import {
+  eventProvider,
+  questionProvider,
+  roomProvider,
+  sessionProvider,
+  speakerProvider,
+} from "./dataProviders/dataProviders";
 
 const dataProviders: { dataProvider: DataProvider; ressources: string[] }[] = [
   { dataProvider: roomProvider, ressources: ["rooms"] },
   { dataProvider: sessionProvider, ressources: ["sessions"] },
+  { dataProvider: questionProvider, ressources: ["questions"] },
+  { dataProvider: eventProvider, ressources: ["events"] },
+  { dataProvider: speakerProvider, ressources: ["speakers"] },
 ];
 
 const baseDataProvider = jsonServerProvider(
