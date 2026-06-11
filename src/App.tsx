@@ -7,9 +7,15 @@ import {
 } from "react-admin";
 import { Layout } from "./Layout";
 import { dataProvider } from "./dataProvider";
+import { authProvider } from "./authProvider";
 
 export const App = () => (
-  <Admin layout={Layout} dataProvider={dataProvider}>
+  <Admin
+    layout={Layout}
+    dataProvider={dataProvider}
+    authProvider={authProvider}
+    requireAuth
+  >
     <Resource
       name="rooms"
       list={ListGuesser}

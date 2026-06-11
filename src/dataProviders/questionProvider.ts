@@ -123,7 +123,7 @@ export const questionProvider: DataProvider = {
     const response = await fetch(
       `${API_URL}/events/${eventId}/sessions/${sessionId}/${resource}`,
       {
-        method: "PATCH",
+        method: "POST",
         body: JSON.stringify(params.data),
       },
     );

@@ -121,7 +121,7 @@ export const sessionProvider: DataProvider = {
   create: async function (resource: string, params: CreateParams) {
     const { eventId } = params.meta;
     const response = await fetch(`${API_URL}/events/${eventId}/${resource}`, {
-      method: "PATCH",
+      method: "POST",
       body: JSON.stringify(params.data),
     });
     const { data } = await response.json();
