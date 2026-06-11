@@ -1,0 +1,32 @@
+import {
+  Admin,
+  Resource,
+  ListGuesser,
+  EditGuesser,
+  ShowGuesser,
+} from "react-admin";
+import { Layout } from "./Layout";
+import { dataProvider } from "./dataProvider";
+
+export const App = () => (
+  <Admin layout={Layout} dataProvider={dataProvider}>
+    <Resource
+      name="rooms"
+      list={ListGuesser}
+      edit={EditGuesser}
+      show={ShowGuesser}
+    />
+    <Resource
+      name="events"
+      list={ListGuesser}
+      edit={EditGuesser}
+      show={ShowGuesser}
+    />
+    <Resource
+      name="speakers"
+      list={ListGuesser}
+      edit={EditGuesser}
+      show={ShowGuesser}
+    />
+  </Admin>
+);
