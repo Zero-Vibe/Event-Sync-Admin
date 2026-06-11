@@ -8,6 +8,7 @@ import {
 import { Layout } from "./Layout";
 import { dataProvider } from "./dataProvider";
 import { authProvider } from "./authProvider";
+import { EventList, EventShow, EventEdit, EventCreate } from "./events";
 
 export const App = () => (
   <Admin
@@ -24,9 +25,10 @@ export const App = () => (
     />
     <Resource
       name="events"
-      list={ListGuesser}
-      edit={EditGuesser}
-      show={ShowGuesser}
+      list={EventList}
+      show={EventShow}
+      edit={EventEdit}
+      create={EventCreate}
     />
     <Resource
       name="speakers"
