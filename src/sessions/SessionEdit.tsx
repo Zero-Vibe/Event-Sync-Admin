@@ -1,0 +1,74 @@
+import {
+  Edit,
+  SimpleForm,
+  TextInput,
+  DateTimeInput,
+  NumberInput,
+  ReferenceInput,
+  SelectInput,
+  required,
+  ArrayInput,
+  SimpleFormIterator,
+} from "react-admin";
+import { useSearchParams } from "react-router-dom";
+
+const transformOnSave = (data: Record<string, unknown>) => {
+  const raw = data.speakersId as Array<{ speakerId: string }> | undefined;
+  return {
+    title: data.title,
+    description: data.description,
+    startTime: data.startTime,
+    endTime: data.endTime,
+    roomId: data.roomId,
+    capacity: data.capacity,
+    speakersId: raw?.map((item) => item.speakerId).filter(Boolean) ?? [],
+  };
+};
+
+const transformOnLoad = (data: Record<string, unknown>) => {
+  if (data.speakers && Array.isArray(data.speakers)) {
+    return {
+      ...data,
+      speakersId: (data.speakers as Array<{ id: string }>).map((s) => ({
+        speakerId: s.id,
+      })),
+    };
+  }
+  return data;
+};
+
+export const SessionEdit = () => {
+  const [searchParams] = useSearchParams();
+  const eventId = searchParams.get("eventId");
+
+  return (
+    <Edit
+      queryOptions={{ meta: { eventId }, select: transformOnLoad }}
+      mutationOptions={{ meta: { eventId } }}
+      transform={transformOnSave}
+      redirect={(resource, id) => `/${resource}/${id}/show?eventId=${eventId}`}
+    >
+      <SimpleForm>
+        <TextInput source="title" validate={required()} fullWidth />
+        <TextInput source="description" multiline rows={4} fullWidth />
+        <DateTimeInput source="startTime" validate={required()} />
+        <DateTimeInput source="endTime" validate={required()} />
+        <ReferenceInput source="roomId" reference="rooms">
+          <SelectInput optionText="name" />
+        </ReferenceInput>
+        <NumberInput source="capacity" />
+        <ArrayInput source="speakersId" label="Speaker(s)">
+          <SimpleFormIterator inline>
+            <ReferenceInput source="speakerId" reference="speakers">
+              <SelectInput
+                optionText={(r: { firstName: string; lastName: string }) =>
+                  `${r.firstName} ${r.lastName}`
+                }
+              />
+            </ReferenceInput>
+          </SimpleFormIterator>
+        </ArrayInput>
+      </SimpleForm>
+    </Edit>
+  );
+};

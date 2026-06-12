@@ -4,6 +4,7 @@ import { dataProvider } from "./dataProvider";
 import { authProvider } from "./authProvider";
 import { EventList, EventShow, EventEdit, EventCreate } from "./events";
 import { RoomList, RoomShow, RoomEdit, RoomCreate } from "./rooms";
+import { SessionShow, SessionEdit, SessionCreate } from "./sessions";
 import {
   SpeakerList,
   SpeakerShow,
@@ -31,6 +32,12 @@ export const App = () => (
       show={EventShow}
       edit={EventEdit}
       create={EventCreate}
+    />
+    <Resource
+      name="sessions"
+      show={SessionShow}
+      edit={SessionEdit}
+      create={SessionCreate}
     />
     <Resource
       name="speakers"
