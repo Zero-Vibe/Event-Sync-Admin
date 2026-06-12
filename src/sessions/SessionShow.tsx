@@ -10,6 +10,7 @@ import {
   ReferenceField,
 } from "react-admin";
 import { useSearchParams } from "react-router-dom";
+import { QuestionsList } from "../questions";
 
 const SessionTitle = () => {
   const { record } = useShowContext();
@@ -43,6 +44,7 @@ export const SessionShow = () => {
           </Datagrid>
         </ArrayField>
       </SimpleShowLayout>
+      <QuestionsList />
     </Show>
   );
 };

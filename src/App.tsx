@@ -5,6 +5,7 @@ import { authProvider } from "./authProvider";
 import { EventList, EventShow, EventEdit, EventCreate } from "./events";
 import { RoomList, RoomShow, RoomEdit, RoomCreate } from "./rooms";
 import { SessionShow, SessionEdit, SessionCreate } from "./sessions";
+import { QuestionCreate } from "./questions";
 import {
   SpeakerList,
   SpeakerShow,
@@ -46,5 +47,6 @@ export const App = () => (
       edit={SpeakerEdit}
       create={SpeakerCreate}
     />
+    <Resource name="questions" create={QuestionCreate} />
   </Admin>
 );
