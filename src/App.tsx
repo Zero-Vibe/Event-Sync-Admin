@@ -9,6 +9,7 @@ import { Layout } from "./Layout";
 import { dataProvider } from "./dataProvider";
 import { authProvider } from "./authProvider";
 import { EventList, EventShow, EventEdit, EventCreate } from "./events";
+import { RoomList, RoomShow, RoomEdit, RoomCreate } from "./rooms";
 
 export const App = () => (
   <Admin
@@ -19,9 +20,10 @@ export const App = () => (
   >
     <Resource
       name="rooms"
-      list={ListGuesser}
-      edit={EditGuesser}
-      show={ShowGuesser}
+      list={RoomList}
+      show={RoomShow}
+      edit={RoomEdit}
+      create={RoomCreate}
     />
     <Resource
       name="events"
