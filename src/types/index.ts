@@ -10,7 +10,7 @@ export interface Event {
 
 export interface User {
   id: string;
-  isAdmin: boolean;
+  admin: boolean;
   email: string;
   name: string;
   joinDate: Date;

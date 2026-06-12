@@ -4,6 +4,7 @@ import {
   TextField,
   NumberField,
   DateField,
+  ReferenceField,
   DeleteButton,
   TopToolbar,
   CreateButton,
@@ -44,7 +45,14 @@ export const QuestionsList = () => {
     >
       <Datagrid bulkActionButtons={false} rowClick={false}>
         <TextField source="content" />
-        <TextField source="user.name" label="Creator" emptyText="Anonymous" />
+        <ReferenceField
+          source="user.id"
+          reference="users"
+          label="Creator"
+          empty="Anonymous"
+        >
+          <TextField source="name" />
+        </ReferenceField>
         <NumberField source="upvotes" />
         <DateField source="createdAt" showTime />
         <DeleteButton

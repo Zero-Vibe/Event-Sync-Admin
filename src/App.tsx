@@ -12,6 +12,7 @@ import {
   SpeakerEdit,
   SpeakerCreate,
 } from "./speakers";
+import { UserList, UserShow, UserEdit, UserCreate } from "./users";
 
 export const App = () => (
   <Admin
@@ -48,5 +49,12 @@ export const App = () => (
       create={SpeakerCreate}
     />
     <Resource name="questions" create={QuestionCreate} />
+    <Resource
+      name="users"
+      list={UserList}
+      show={UserShow}
+      edit={UserEdit}
+      create={UserCreate}
+    />
   </Admin>
 );
