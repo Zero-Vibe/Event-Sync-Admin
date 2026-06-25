@@ -40,7 +40,7 @@ export interface Speaker {
   id: string;
   firstName: string;
   lastName: string;
-  pictureUrl: string;
+  base64Picture: string;
   biography: string;
   links: SpeakerLink[];
 }
