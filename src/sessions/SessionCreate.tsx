@@ -20,6 +20,7 @@ export const SessionCreate = () => {
     <Create
       mutationOptions={{ meta: { eventId } }}
       transform={(data: Record<string, unknown>) => ({
+        eventId,
         title: data.title,
         description: data.description,
         startTime: data.startTime,
