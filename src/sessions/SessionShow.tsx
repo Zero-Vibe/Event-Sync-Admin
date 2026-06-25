@@ -8,13 +8,28 @@ import {
   Datagrid,
   useShowContext,
   ReferenceField,
+  Title,
+  TopToolbar,
+  EditButton,
 } from "react-admin";
 import { useSearchParams } from "react-router-dom";
 import { QuestionsList } from "../questions";
 
 const SessionTitle = () => {
   const { record } = useShowContext();
-  return <span>{record?.title || null}</span>;
+  return <Title title={"Details " + record?.title || null} />;
+};
+
+const SessionActions = () => {
+  const { record } = useShowContext();
+  if (!record) return null;
+  return (
+    <TopToolbar>
+      <EditButton
+        to={`/sessions/${record.id}/edit?eventId=${record.eventId}`}
+      />
+    </TopToolbar>
+  );
 };
 
 export const SessionShow = () => {
@@ -22,9 +37,14 @@ export const SessionShow = () => {
   const eventId = searchParams.get("eventId");
 
   return (
-    <Show title={<SessionTitle />} queryOptions={{ meta: { eventId } }}>
+    <Show
+      actions={<SessionActions />}
+      title={<SessionTitle />}
+      queryOptions={{ meta: { eventId } }}
+    >
       <SimpleShowLayout>
         <TextField source="title" />
+        <TextField source="id" />
         <TextField source="description" />
         <DateField source="startTime" showTime label="Start" />
         <DateField source="endTime" showTime label="End" />

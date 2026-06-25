@@ -36,6 +36,7 @@ const SessionsList = () => {
       resource="sessions"
       queryOptions={{ meta: { eventId } }}
       actions={<SessionListActions eventId={eventId} />}
+      title={false}
     >
       <Datagrid
         bulkActionButtons={false}
@@ -59,6 +60,7 @@ export const EventShow = () => (
   <Show>
     <SimpleShowLayout>
       <TextField source="title" />
+      <TextField source="id" />
       <TextField source="description" />
       <DateField source="startDateTime" showTime label="Start" />
       <DateField source="endDateTime" showTime label="End" />

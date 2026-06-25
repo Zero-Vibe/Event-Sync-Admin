@@ -13,6 +13,7 @@ export const RoomShow = () => (
   <Show>
     <SimpleShowLayout>
       <TextField source="name" />
+      <TextField source="id" />
       <ArrayField source="sessions" label="Sessions">
         <Datagrid
           rowClick={false}

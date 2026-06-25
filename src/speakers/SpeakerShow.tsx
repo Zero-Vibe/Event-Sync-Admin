@@ -16,6 +16,7 @@ export const SpeakerShow = () => (
         label="Picture"
         sx={{ "& img": { maxWidth: 150, borderRadius: "50%" } }}
       />
+      <TextField source="id" />
       <TextField source="firstName" />
       <TextField source="lastName" />
       <TextField source="biography" />
