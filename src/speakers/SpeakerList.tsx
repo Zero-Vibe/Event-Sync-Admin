@@ -2,9 +2,9 @@ import {
   List,
   Datagrid,
   TextField,
-  ImageField,
   DeleteButton,
   SearchInput,
+  FunctionField,
 } from "react-admin";
 
 const speakerFilters = [
@@ -17,10 +17,12 @@ export const SpeakerList = () => (
       <TextField source="firstName" />
       <TextField source="lastName" />
       <TextField source="biography" />
-      <ImageField
-        source="pictureUrl"
+      <FunctionField
         label="Picture"
-        sx={{ "& img": { maxWidth: 50, maxHeight: 50, borderRadius: "50%" } }}
+        render={(record) =>
+          record.base64Picture ? <img src={record.base64Picture} /> : null
+        }
+        style={{ maxWidth: "200px", borderRadius: "4px" }}
       />
       <DeleteButton />
     </Datagrid>

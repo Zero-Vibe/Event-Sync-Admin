@@ -2,19 +2,21 @@ import {
   Show,
   SimpleShowLayout,
   TextField,
-  ImageField,
   ArrayField,
   Datagrid,
   UrlField,
+  FunctionField,
 } from "react-admin";
 
 export const SpeakerShow = () => (
   <Show>
     <SimpleShowLayout>
-      <ImageField
-        source="pictureUrl"
+      <FunctionField
         label="Picture"
-        sx={{ "& img": { maxWidth: 150, borderRadius: "50%" } }}
+        render={(record) =>
+          record.base64Picture ? <img src={record.base64Picture} /> : null
+        }
+        style={{ maxWidth: "200px", borderRadius: "4px" }}
       />
       <TextField source="id" />
       <TextField source="firstName" />
