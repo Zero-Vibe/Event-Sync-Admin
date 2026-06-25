@@ -6,25 +6,9 @@ import {
   DateField,
   ReferenceField,
   DeleteButton,
-  TopToolbar,
-  CreateButton,
   useShowContext,
 } from "react-admin";
 import { useSearchParams } from "react-router-dom";
-
-const QuestionsListActions = ({
-  eventId,
-  sessionId,
-}: {
-  eventId: string;
-  sessionId: string;
-}) => (
-  <TopToolbar>
-    <CreateButton
-      to={`/questions/create?eventId=${eventId}&sessionId=${sessionId}`}
-    />
-  </TopToolbar>
-);
 
 export const QuestionsList = () => {
   const { record } = useShowContext();
@@ -38,10 +22,10 @@ export const QuestionsList = () => {
     <List
       resource="questions"
       queryOptions={{ meta: { eventId, sessionId } }}
-      actions={
-        <QuestionsListActions eventId={eventId!} sessionId={sessionId} />
-      }
+      actions={false}
       sort={{ field: "upvotes", order: "DESC" }}
+      title={false}
+      empty={false}
     >
       <Datagrid bulkActionButtons={false} rowClick={false}>
         <TextField source="content" />
