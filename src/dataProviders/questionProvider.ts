@@ -18,6 +18,13 @@ const API_URL = import.meta.env.VITE_JSON_SERVER_URL;
 
 const baseDataProvider = jsonServerProvider(API_URL);
 
+function headers() {
+  return new Headers({
+    "Content-Type": "application/json",
+    Authorization: "Bearer " + localStorage.getItem("accessToken") || "",
+  });
+}
+
 export const questionProvider: DataProvider = {
   ...baseDataProvider,
   getList: async function (
@@ -28,13 +35,15 @@ export const questionProvider: DataProvider = {
     const start = (page - 1) * perPage;
     const end = start + perPage;
 
-    const { eventId, sessionId } = params.meta;
+    const eventId = params.meta?.eventId;
+    const sessionId = params.meta?.sessionId;
+    if (!eventId || !sessionId) return { data: [], total: 0 };
 
     const { field, order } = params.sort;
-    const filter = params.filter;
+    const hasFilter = params.filter && Object.keys(params.filter).length > 0;
 
     const response = await fetchUtils.fetchJson(
-      `${API_URL}/events/${eventId}/sessions/${sessionId}/${resource}?_start=${start}&_end=${end}&_sort=${field}&_order=${order}${filter ? "&filter=" + filter : null}`,
+      `${API_URL}/events/${eventId}/sessions/${sessionId}/${resource}?_start=${start}&_end=${end}&_sort=${field}&_order=${order}${hasFilter ? "&filter=" + JSON.stringify(params.filter) : ""}`,
     );
     return {
       data: response.json,
@@ -46,24 +55,32 @@ export const questionProvider: DataProvider = {
     params: GetOneParams<RecordType> & QueryFunctionContext,
   ) {
     const id = params.id;
-    const { eventId, sessionId } = params.meta;
+    const eventId = params.meta?.eventId;
+    const sessionId = params.meta?.sessionId;
+    if (!eventId || !sessionId) return { data: undefined };
+
     const response = await fetch(
       `${API_URL}/events/${eventId}/sessions/${sessionId}/${resource}/${id}`,
+      { headers: headers() },
     );
-    const { data } = await response.json();
-    return data;
+    const json = await response.json();
+    return { data: json };
   },
   getMany: async function (
     resource: string,
     params: GetManyParams<RecordType> & QueryFunctionContext,
   ) {
     const ids = params.ids;
-    const { eventId, sessionId } = params.meta;
+    const eventId = params.meta?.eventId;
+    const sessionId = params.meta?.sessionId;
+    if (!eventId || !sessionId) return { data: [] };
+
     const response = await fetch(
       `${API_URL}/events/${eventId}/sessions/${sessionId}/${resource}?${ids.map((id) => "id=" + id).join("&")}`,
+      { headers: headers() },
     );
-    const { data } = await response.json();
-    return data;
+    const json = await response.json();
+    return { data: json };
   },
   getManyReference: async function (
     resource: string,
@@ -77,11 +94,12 @@ export const questionProvider: DataProvider = {
     const end = start + perPage;
     const { field, order } = params.sort;
 
-    const { eventId, sessionId } = params.meta;
+    const eventId = params.meta?.eventId;
+    const sessionId = params.meta?.sessionId;
+    if (!eventId || !sessionId) return { data: [], total: 0 };
 
     const response = await fetchUtils.fetchJson(
-      `${API_URL}/events/${eventId}/sessions/${sessionId}/${resource}/${id}/${target}?_start=${start}&_end=${end}&_sort=${field}&_order=${order}
-      `,
+      `${API_URL}/events/${eventId}/sessions/${sessionId}/${resource}/${id}/${target}?_start=${start}&_end=${end}&_sort=${field}&_order=${order}`,
     );
     return {
       data: response.json,
@@ -90,20 +108,36 @@ export const questionProvider: DataProvider = {
   },
   update: async function (resource: string, params: UpdateParams) {
     const id = params.id;
-    const { eventId, sessionId } = params.meta;
+    const eventId = params.meta?.eventId || params.previousData?.eventId;
+    const sessionId = params.meta?.sessionId || params.previousData?.sessionId;
+    if (!eventId || !sessionId)
+      throw new Error(
+        "meta.eventId and meta.sessionId are required for questions",
+      );
+
     const response = await fetch(
       `${API_URL}/events/${eventId}/sessions/${sessionId}/${resource}/${id}`,
       {
         method: "PUT",
         body: JSON.stringify(params.data),
+        headers: { "Content-Type": "application/json", ...headers() },
       },
     );
-    const { data } = await response.json();
-    return data;
+    if (!response.ok) {
+      throw new Error(`Update failed (${response.status})`);
+    }
+    const json = await response.json();
+    return { data: json };
   },
   updateMany: async function (resource: string, params: UpdateManyParams) {
+    const eventId = params.meta?.eventId;
+    const sessionId = params.meta?.sessionId;
+    if (!eventId || !sessionId)
+      throw new Error(
+        "meta.eventId and meta.sessionId are required for questions",
+      );
+
     const ids = params.ids;
-    const { eventId, sessionId } = params.meta;
     const modifiedId: string[] = [];
     ids.forEach(async (id) => {
       const response = await fetch(
@@ -111,47 +145,75 @@ export const questionProvider: DataProvider = {
         {
           method: "PUT",
           body: JSON.stringify(params.data),
+          headers: { "Content-Type": "application/json", ...headers() },
         },
       );
-      const { data } = await response.json();
-      modifiedId.push(data["id"]);
+      const json = await response.json();
+      modifiedId.push(json["id"]);
     });
     return { data: modifiedId };
   },
   create: async function (resource: string, params: CreateParams) {
-    const { eventId, sessionId } = params.meta;
+    const eventId = params.meta?.eventId || params.data?.eventId;
+    const sessionId = params.meta?.sessionId || params.data?.sessionId;
+    if (!eventId || !sessionId)
+      throw new Error(
+        "meta.eventId and meta.sessionId are required for questions",
+      );
+
     const response = await fetch(
       `${API_URL}/events/${eventId}/sessions/${sessionId}/${resource}`,
       {
-        method: "PATCH",
+        method: "POST",
         body: JSON.stringify(params.data),
+        headers: { "Content-Type": "application/json", ...headers() },
       },
     );
-    const { data } = await response.json();
-    return data;
+    if (!response.ok) {
+      throw new Error(`Create failed (${response.status})`);
+    }
+    const json = await response.json();
+    return { data: json };
   },
   delete: async function (resource: string, params: DeleteParams<RecordType>) {
     const id = params.id;
-    const { eventId, sessionId } = params.meta;
-    await fetch(
+    const eventId = params.meta?.eventId || params.previousData?.eventId;
+    const sessionId = params.meta?.sessionId || params.previousData?.sessionId;
+    if (!eventId || !sessionId)
+      throw new Error(
+        "meta.eventId and meta.sessionId are required for questions",
+      );
+
+    const response = await fetch(
       `${API_URL}/events/${eventId}/sessions/${sessionId}/${resource}/${id}`,
       {
         method: "DELETE",
+        headers: headers(),
       },
     );
+    if (!response.ok) {
+      throw new Error(`Delete failed (${response.status})`);
+    }
     return { data: params.previousData };
   },
   deleteMany: async function (
     resource: string,
     params: DeleteManyParams<RecordType>,
   ) {
+    const eventId = params.meta?.eventId;
+    const sessionId = params.meta?.sessionId;
+    if (!eventId || !sessionId)
+      throw new Error(
+        "meta.eventId and meta.sessionId are required for questions",
+      );
+
     const ids = params.ids;
-    const { eventId, sessionId } = params.meta;
     ids.forEach(async (id) => {
       await fetch(
         `${API_URL}/events/${eventId}/sessions/${sessionId}/${resource}/${id}`,
         {
           method: "DELETE",
+          headers: headers(),
         },
       );
     });

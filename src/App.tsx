@@ -1,32 +1,59 @@
-import {
-  Admin,
-  Resource,
-  ListGuesser,
-  EditGuesser,
-  ShowGuesser,
-} from "react-admin";
+import { Admin, Resource } from "react-admin";
 import { Layout } from "./Layout";
 import { dataProvider } from "./dataProvider";
+import { authProvider } from "./authProvider";
+import { EventList, EventShow, EventEdit, EventCreate } from "./events";
+import { RoomList, RoomShow, RoomEdit, RoomCreate } from "./rooms";
+import { SessionShow, SessionEdit, SessionCreate } from "./sessions";
+import {
+  SpeakerList,
+  SpeakerShow,
+  SpeakerEdit,
+  SpeakerCreate,
+} from "./speakers";
+import { UserList, UserShow, UserEdit, UserCreate } from "./users";
 
 export const App = () => (
-  <Admin layout={Layout} dataProvider={dataProvider}>
+  <Admin
+    layout={Layout}
+    dataProvider={dataProvider}
+    authProvider={authProvider}
+    requireAuth
+  >
     <Resource
       name="rooms"
-      list={ListGuesser}
-      edit={EditGuesser}
-      show={ShowGuesser}
+      list={RoomList}
+      show={RoomShow}
+      edit={RoomEdit}
+      create={RoomCreate}
     />
     <Resource
       name="events"
-      list={ListGuesser}
-      edit={EditGuesser}
-      show={ShowGuesser}
+      list={EventList}
+      show={EventShow}
+      edit={EventEdit}
+      create={EventCreate}
+    />
+    <Resource
+      name="sessions"
+      show={SessionShow}
+      edit={SessionEdit}
+      create={SessionCreate}
     />
     <Resource
       name="speakers"
-      list={ListGuesser}
-      edit={EditGuesser}
-      show={ShowGuesser}
+      list={SpeakerList}
+      show={SpeakerShow}
+      edit={SpeakerEdit}
+      create={SpeakerCreate}
+    />
+    <Resource name="questions" />
+    <Resource
+      name="users"
+      list={UserList}
+      show={UserShow}
+      edit={UserEdit}
+      create={UserCreate}
     />
   </Admin>
 );

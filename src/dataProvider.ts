@@ -6,6 +6,7 @@ import {
   roomProvider,
   sessionProvider,
   speakerProvider,
+  userProvider,
 } from "./dataProviders/dataProviders";
 
 const dataProviders: { dataProvider: DataProvider; ressources: string[] }[] = [
@@ -14,6 +15,7 @@ const dataProviders: { dataProvider: DataProvider; ressources: string[] }[] = [
   { dataProvider: questionProvider, ressources: ["questions"] },
   { dataProvider: eventProvider, ressources: ["events"] },
   { dataProvider: speakerProvider, ressources: ["speakers"] },
+  { dataProvider: userProvider, ressources: ["users"] },
 ];
 
 const baseDataProvider = jsonServerProvider(
