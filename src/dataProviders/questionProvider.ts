@@ -18,9 +18,11 @@ const API_URL = import.meta.env.VITE_JSON_SERVER_URL;
 
 const baseDataProvider = jsonServerProvider(API_URL);
 
-function authHeaders() {
-  const token = localStorage.getItem("accessToken");
-  return token ? { Authorization: `${token}` } : {};
+function headers() {
+  return new Headers({
+    "Content-Type": "application/json",
+    Authorization: "Bearer " + localStorage.getItem("accessToken") || "",
+  });
 }
 
 export const questionProvider: DataProvider = {
@@ -59,7 +61,7 @@ export const questionProvider: DataProvider = {
 
     const response = await fetch(
       `${API_URL}/events/${eventId}/sessions/${sessionId}/${resource}/${id}`,
-      { headers: authHeaders() },
+      { headers: headers() },
     );
     const json = await response.json();
     return { data: json };
@@ -75,7 +77,7 @@ export const questionProvider: DataProvider = {
 
     const response = await fetch(
       `${API_URL}/events/${eventId}/sessions/${sessionId}/${resource}?${ids.map((id) => "id=" + id).join("&")}`,
-      { headers: authHeaders() },
+      { headers: headers() },
     );
     const json = await response.json();
     return { data: json };
@@ -118,7 +120,7 @@ export const questionProvider: DataProvider = {
       {
         method: "PUT",
         body: JSON.stringify(params.data),
-        headers: { "Content-Type": "application/json", ...authHeaders() },
+        headers: { "Content-Type": "application/json", ...headers() },
       },
     );
     if (!response.ok) {
@@ -143,7 +145,7 @@ export const questionProvider: DataProvider = {
         {
           method: "PUT",
           body: JSON.stringify(params.data),
-          headers: { "Content-Type": "application/json", ...authHeaders() },
+          headers: { "Content-Type": "application/json", ...headers() },
         },
       );
       const json = await response.json();
@@ -164,7 +166,7 @@ export const questionProvider: DataProvider = {
       {
         method: "POST",
         body: JSON.stringify(params.data),
-        headers: { "Content-Type": "application/json", ...authHeaders() },
+        headers: { "Content-Type": "application/json", ...headers() },
       },
     );
     if (!response.ok) {
@@ -186,7 +188,7 @@ export const questionProvider: DataProvider = {
       `${API_URL}/events/${eventId}/sessions/${sessionId}/${resource}/${id}`,
       {
         method: "DELETE",
-        headers: authHeaders(),
+        headers: headers(),
       },
     );
     if (!response.ok) {
@@ -211,7 +213,7 @@ export const questionProvider: DataProvider = {
         `${API_URL}/events/${eventId}/sessions/${sessionId}/${resource}/${id}`,
         {
           method: "DELETE",
-          headers: authHeaders(),
+          headers: headers(),
         },
       );
     });

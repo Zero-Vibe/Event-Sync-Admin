@@ -19,8 +19,10 @@ const API_URL = import.meta.env.VITE_JSON_SERVER_URL;
 const baseDataProvider = jsonServerProvider(API_URL);
 
 function headers() {
-  const token = localStorage.getItem("accessToken");
-  return token ? { Authorization: `${token}` } : {};
+  return new Headers({
+    "Content-Type": "application/json",
+    Authorization: "Bearer " + localStorage.getItem("accessToken") || "",
+  });
 }
 
 export const sessionProvider: DataProvider = {

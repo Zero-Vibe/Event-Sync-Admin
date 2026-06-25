@@ -19,7 +19,7 @@ const baseDataProvider = jsonServerProvider(API_URL);
 function headers() {
   return new Headers({
     "Content-Type": "application/json",
-    Authorization: localStorage.getItem("accessToken") || "",
+    Authorization: "Bearer " + localStorage.getItem("accessToken") || "",
   });
 }
 
