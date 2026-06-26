@@ -13,7 +13,12 @@ export const UserShow = () => (
       <TextField source="id" />
       <TextField source="email" />
       <BooleanField source="admin" label="Admin" />
-      <DateField source="joinDate" showTime />
+      <DateField
+        source="joinDate"
+        showTime
+        label="Start Time (UTC)"
+        options={{ timeZone: "UTC" }}
+      />
     </SimpleShowLayout>
   </Show>
 );
