@@ -11,6 +11,13 @@ import {
   ArrayInput,
 } from "react-admin";
 import { useSearchParams } from "react-router-dom";
+import { transformToUTC } from "../utils/timezoneUtils";
+
+const transformDate = (data: Record<string, unknown>) => {
+  if (!data) return;
+  if (data.startTime) data.startTime = transformToUTC(data["startTime"]);
+  if (data.endTime) data.endTime = transformToUTC(data["endTime"]);
+};
 
 export const SessionCreate = () => {
   const [searchParams] = useSearchParams();
@@ -19,20 +26,18 @@ export const SessionCreate = () => {
   return (
     <Create
       mutationOptions={{ meta: { eventId } }}
-      transform={(data: Record<string, unknown>) => ({
-        eventId,
-        title: data.title,
-        description: data.description,
-        startTime: data.startTime,
-        endTime: data.endTime,
-        roomId: data.roomId,
-        capacity: data.capacity,
-        speakersId:
-          (data.speakersId as Array<{ speakerId: string }>)
-            ?.map((item) => item.speakerId)
-            .filter(Boolean) ?? [],
-      })}
-      redirect={(resource, id) => `/sessions/${id}/show?eventId=${eventId}`}
+      transform={(data: Record<string, unknown>) => {
+        transformDate(data);
+        return {
+          ...data,
+          eventId,
+          speakersId:
+            (data.speakersId as Array<{ speakerId: string }>)
+              ?.map((item) => item.speakerId)
+              .filter(Boolean) ?? [],
+        };
+      }}
+      redirect={(resource, id) => `/${resource}/${id}/show?eventId=${eventId}`}
     >
       <SimpleForm>
         <TextInput source="title" validate={required()} fullWidth />

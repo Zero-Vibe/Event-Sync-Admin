@@ -37,6 +37,7 @@ const SessionsList = () => {
       queryOptions={{ meta: { eventId } }}
       actions={<SessionListActions eventId={eventId} />}
       title={false}
+      empty={false} // just to make the working create button in topBar
     >
       <Datagrid
         bulkActionButtons={false}
@@ -44,8 +45,18 @@ const SessionsList = () => {
       >
         <TextField source="title" />
         <TextField source="status" />
-        <DateField source="startTime" showTime />
-        <DateField source="endTime" showTime />
+        <DateField
+          source="startTime"
+          showTime
+          label="Start Time (UTC)"
+          options={{ timeZone: "UTC" }}
+        />
+        <DateField
+          source="endTime"
+          showTime
+          label="End Time (UTC)"
+          options={{ timeZone: "UTC" }}
+        />
         <SessionEditButton />
         <DeleteButton
           redirect={false}
@@ -62,8 +73,18 @@ export const EventShow = () => (
       <TextField source="title" />
       <TextField source="id" />
       <TextField source="description" />
-      <DateField source="startDateTime" showTime label="Start" />
-      <DateField source="endDateTime" showTime label="End" />
+      <DateField
+        source="startDateTime"
+        label="Start Time (UTC)"
+        showTime
+        options={{ timeZone: "UTC" }}
+      />
+      <DateField
+        source="endDateTime"
+        label="End Time (UTC)"
+        showTime
+        options={{ timeZone: "UTC" }}
+      />
       <TextField source="location" />
       <TextField source="createdBy.name" label="Created by" />
     </SimpleShowLayout>

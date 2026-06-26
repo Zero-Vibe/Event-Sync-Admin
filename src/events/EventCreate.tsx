@@ -5,14 +5,31 @@ import {
   DateTimeInput,
   required,
 } from "react-admin";
+import { transformToUTC } from "../utils/timezoneUtils";
+
+const transformDate = (data: Record<string, unknown>) => {
+  return {
+    ...data,
+    startDateTime: transformToUTC(data["startDateTime"]),
+    endDateTime: transformToUTC(data["endDateTime"]),
+  };
+};
 
 export const EventCreate = () => (
-  <Create>
+  <Create transform={transformDate}>
     <SimpleForm>
       <TextInput source="title" validate={required()} fullWidth />
       <TextInput source="description" multiline rows={4} fullWidth />
-      <DateTimeInput source="startDateTime" validate={required()} />
-      <DateTimeInput source="endDateTime" validate={required()} />
+      <DateTimeInput
+        source="startDateTime"
+        label="Start time (UTC)"
+        validate={required()}
+      />
+      <DateTimeInput
+        source="endDateTime"
+        label="End time (UTC)"
+        validate={required()}
+      />
       <TextInput source="location" fullWidth />
     </SimpleForm>
   </Create>

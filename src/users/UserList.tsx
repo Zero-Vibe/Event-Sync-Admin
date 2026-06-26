@@ -37,7 +37,12 @@ export const UserList = () => (
       <TextField source="name" />
       <TextField source="email" />
       <BooleanField source="admin" label="Admin" />
-      <DateField source="joinDate" showTime />
+      <DateField
+        source="joinDate"
+        showTime
+        label="Start Time (UTC)"
+        options={{ timeZone: "UTC" }}
+      />
       <AdminToggle />
       <DeleteButton />
     </Datagrid>

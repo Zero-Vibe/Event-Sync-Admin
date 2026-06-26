@@ -11,16 +11,19 @@ import {
   SimpleFormIterator,
 } from "react-admin";
 import { useSearchParams } from "react-router-dom";
+import { formatFromUTC, transformToUTC } from "../utils/timezoneUtils";
+
+const transformDate = (data: Record<string, unknown>) => {
+  if (!data) return;
+  if (data.startTime) data.startTime = transformToUTC(data["startTime"]);
+  if (data.endTime) data.endTime = transformToUTC(data["endTime"]);
+};
 
 const transformOnSave = (data: Record<string, unknown>) => {
   const raw = data.speakersId as Array<{ speakerId: string }> | undefined;
+  transformDate(data);
   return {
-    title: data.title,
-    description: data.description,
-    startTime: data.startTime,
-    endTime: data.endTime,
-    roomId: data.roomId,
-    capacity: data.capacity,
+    ...data,
     speakersId: raw?.map((item) => item.speakerId).filter(Boolean) ?? [],
   };
 };
@@ -29,6 +32,8 @@ const transformOnLoad = (data: Record<string, unknown>) => {
   if (data.speakers && Array.isArray(data.speakers)) {
     return {
       ...data,
+      startTime: formatFromUTC(data.startTime),
+      endTime: formatFromUTC(data.endTime),
       speakersId: (data.speakers as Array<{ id: string }>).map((s) => ({
         speakerId: s.id,
       })),
@@ -45,7 +50,10 @@ export const SessionEdit = () => {
     <Edit
       queryOptions={{ meta: { eventId }, select: transformOnLoad }}
       mutationOptions={{ meta: { eventId } }}
-      transform={transformOnSave}
+      transform={(data) => {
+        data.eventId = eventId;
+        return transformOnSave(data);
+      }}
       redirect={(resource, id) => `/${resource}/${id}/show?eventId=${eventId}`}
     >
       <SimpleForm>
