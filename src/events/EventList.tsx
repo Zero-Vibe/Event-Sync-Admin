@@ -15,8 +15,18 @@ export const EventList = () => (
   <List filters={eventFilters}>
     <Datagrid rowClick="show" bulkActionButtons={false}>
       <TextField source="title" />
-      <DateField source="startDateTime" showTime />
-      <DateField source="endDateTime" showTime />
+      <DateField
+        source="startDateTime"
+        label="Start Time (UTC)"
+        showTime
+        options={{ timeZone: "UTC" }}
+      />
+      <DateField
+        source="endDateTime"
+        label="End Time (UTC)"
+        showTime
+        options={{ timeZone: "UTC" }}
+      />
       <TextField source="location" />
       <DeleteButton />
     </Datagrid>

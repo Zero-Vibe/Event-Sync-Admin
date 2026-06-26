@@ -62,8 +62,18 @@ export const EventShow = () => (
       <TextField source="title" />
       <TextField source="id" />
       <TextField source="description" />
-      <DateField source="startDateTime" showTime label="Start" />
-      <DateField source="endDateTime" showTime label="End" />
+      <DateField
+        source="startDateTime"
+        label="Start Time (UTC)"
+        showTime
+        options={{ timeZone: "UTC" }}
+      />
+      <DateField
+        source="endDateTime"
+        label="End Time (UTC)"
+        showTime
+        options={{ timeZone: "UTC" }}
+      />
       <TextField source="location" />
       <TextField source="createdBy.name" label="Created by" />
     </SimpleShowLayout>
