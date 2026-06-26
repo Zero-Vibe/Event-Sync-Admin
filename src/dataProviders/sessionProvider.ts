@@ -115,7 +115,7 @@ export const sessionProvider: DataProvider = {
       {
         method: "PUT",
         body: JSON.stringify(params.data),
-        headers: { "Content-Type": "application/json", ...headers() },
+        headers: headers(),
       },
     );
     if (!response.ok) {
@@ -136,7 +136,7 @@ export const sessionProvider: DataProvider = {
         {
           method: "PUT",
           body: JSON.stringify(params.data),
-          headers: { "Content-Type": "application/json", ...headers() },
+          headers: headers(),
         },
       );
       const json = await response.json();
@@ -151,7 +151,7 @@ export const sessionProvider: DataProvider = {
     const response = await fetch(`${API_URL}/events/${eventId}/${resource}`, {
       method: "POST",
       body: JSON.stringify(params.data),
-      headers: { "Content-Type": "application/json", ...headers() },
+      headers: headers(),
     });
     if (!response.ok) {
       throw new Error(`Create failed (${response.status})`);

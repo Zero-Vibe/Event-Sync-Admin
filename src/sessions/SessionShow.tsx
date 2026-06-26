@@ -46,8 +46,18 @@ export const SessionShow = () => {
         <TextField source="title" />
         <TextField source="id" />
         <TextField source="description" />
-        <DateField source="startTime" showTime label="Start" />
-        <DateField source="endTime" showTime label="End" />
+        <DateField
+          source="startTime"
+          showTime
+          label="Start Time (UTC)"
+          options={{ timeZone: "UTC" }}
+        />
+        <DateField
+          source="endTime"
+          showTime
+          label="End Time (UTC)"
+          options={{ timeZone: "UTC" }}
+        />
         <TextField source="status" />
         <NumberField source="capacity" emptyText="Unlimited" />
         <ReferenceField reference="rooms" source="roomId">
