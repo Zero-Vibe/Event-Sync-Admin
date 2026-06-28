@@ -1,10 +1,10 @@
+import { alpha } from "@mui/material/styles";
 import { AppBar } from "react-admin";
-import { Box } from "@mui/material";
 
 export const MyAppBar = () => (
   <AppBar
     sx={(theme) => ({
-      borderBottom: `1px solid ${theme.palette.divider}`,
+      borderBottom: `1px solid ${alpha(theme.palette.divider, 0.6)}`,
       backgroundColor: `${theme.palette.background.default}cc`,
       backdropFilter: "blur(12px)",
       boxShadow: "none",
