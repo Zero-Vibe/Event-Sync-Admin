@@ -9,9 +9,9 @@ export const AppBar = () => (
       backgroundColor: `${theme.palette.background.default}cc`,
       backdropFilter: "blur(12px)",
       boxShadow: "none",
+      color: theme.palette.text.primary,
       "& .MuiToolbar-root": {
         width: "100%",
-        maxWidth: 1152,
         marginLeft: "auto",
         marginRight: "auto",
         paddingLeft: { xs: 2, sm: 3, md: 4 },
@@ -24,6 +24,8 @@ export const AppBar = () => (
       },
     })}
   >
-    <Typography variant="body1">EventSync</Typography>
+    <Typography variant="body1" sx={{ flexGrow: 1 }}>
+      EventSync
+    </Typography>
   </RAAppBar>
 );

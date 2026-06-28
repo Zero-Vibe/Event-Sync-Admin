@@ -1,6 +1,9 @@
 import { createTheme, alpha } from "@mui/material/styles";
 
 const sharedConfig = {
+  sidebar: {
+    width: 300,
+  },
   typography: {
     fontFamily: '"Inter", ui-sans-serif, system-ui, sans-serif',
     button: {
@@ -212,6 +215,24 @@ const sharedConfig = {
         root: {
           maxWidth: "800px",
         },
+      },
+    },
+    RaLogin: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          backgroundImage: "none",
+          backgroundColor: theme.palette.background.default,
+        }),
+        card: ({ theme }) => ({
+          backgroundColor: theme.palette.background.paper,
+          border: `1px solid ${alpha(theme.palette.divider, 0.7)}`,
+          borderRadius: 12,
+          boxShadow: "none",
+        }),
+        icon: ({ theme }) => ({
+          backgroundColor: theme.palette.action.hover,
+          color: theme.palette.text.secondary,
+        }),
       },
     },
   },
