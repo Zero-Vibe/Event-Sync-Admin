@@ -25,10 +25,19 @@ export const authProvider: AuthProvider = {
     localStorage.removeItem("accessToken");
     return Promise.resolve("/login");
   },
-  checkAuth: function () {
-    return localStorage.getItem("accessToken")
-      ? Promise.resolve()
-      : Promise.reject();
+  checkAuth: async function () {
+    const res = await fetch(`${AUTH_API_URL}/authStatus`, {
+      method: "POST",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("accessToken") || "",
+      }),
+    });
+    if (!res.ok) {
+      localStorage.removeItem("accessToken");
+      return Promise.reject();
+    }
+    return Promise.resolve();
   },
   checkError: function (error: { status?: number }) {
     if (error.status === 401 || error.status === 403) {
