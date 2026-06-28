@@ -6,7 +6,6 @@ export const Sidebar = ({ children }: { children?: ReactNode }) => (
     sx={(theme) => ({
       "& .MuiDrawer-paper": {
         borderRight: `1px solid ${theme.palette.divider}`,
-        width: 300,
         boxSizing: "border-box",
       },
       "& .MuiListItemButton-root": {
