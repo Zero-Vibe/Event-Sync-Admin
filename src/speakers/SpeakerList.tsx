@@ -6,6 +6,7 @@ import {
   SearchInput,
   FunctionField,
 } from "react-admin";
+import { Box } from "@mui/material";
 
 const speakerFilters = [
   <SearchInput source="firstName" alwaysOn key="firstName-filter" />,
@@ -20,9 +21,14 @@ export const SpeakerList = () => (
       <FunctionField
         label="Picture"
         render={(record) =>
-          record.base64Picture ? <img src={record.base64Picture} /> : null
+          record.base64Picture ? (
+            <Box
+              component="img"
+              src={record.base64Picture}
+              sx={{ maxWidth: 200, borderRadius: 1.5 }}
+            />
+          ) : null
         }
-        style={{ maxWidth: "200px", borderRadius: "4px" }}
       />
       <DeleteButton />
     </Datagrid>
