@@ -6,9 +6,34 @@ const sharedConfig = {
     button: {
       textTransform: "none" as const,
     },
+    h5: {
+      fontWeight: 600,
+    },
   },
   shape: {
     borderRadius: 10,
+  },
+  components: {
+    MuiCard: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          border: `1px solid ${theme.palette.divider}`,
+          overflow: "hidden",
+          transition: "all 0.15s ease-in-out",
+          "&:hover": {
+            transform: "translateY(-2px)",
+            boxShadow: "0 1px 3px rgba(0,0,0,0.08)",
+          },
+        }),
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundImage: "none",
+        },
+      },
+    },
   },
 };
 
