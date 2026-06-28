@@ -97,7 +97,7 @@ const sharedConfig = {
           borderColor: theme.palette.divider,
         }),
         input: {
-          padding: "10px 12px",
+          padding: "auto 12px",
         },
       },
     },
