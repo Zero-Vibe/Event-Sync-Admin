@@ -2,6 +2,7 @@ import { Admin, Resource } from "react-admin";
 import { Layout } from "./Layout";
 import { dataProvider } from "./dataProvider";
 import { authProvider } from "./authProvider";
+import { theme, darkTheme } from "./theme";
 import { EventList, EventShow, EventEdit, EventCreate } from "./events";
 import { RoomList, RoomShow, RoomEdit, RoomCreate } from "./rooms";
 import { SessionShow, SessionEdit, SessionCreate } from "./sessions";
@@ -18,6 +19,8 @@ export const App = () => (
     layout={Layout}
     dataProvider={dataProvider}
     authProvider={authProvider}
+    theme={theme}
+    darkTheme={darkTheme}
     requireAuth
   >
     <Resource
