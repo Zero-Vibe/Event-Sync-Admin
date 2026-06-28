@@ -24,3 +24,28 @@ export const theme = createTheme({
     },
   },
 });
+
+export const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+    background: {
+      default: "#242424",
+      paper: "#2e2e2e",
+    },
+    text: {
+      primary: "#f7f7f7",
+      secondary: "#999999",
+    },
+    primary: {
+      main: "#f7f7f7",
+      contrastText: "#242424",
+    },
+    divider: "#ffffff1a",
+    error: {
+      main: "#d32f2f",
+    },
+    action: {
+      hover: "#383838",
+    },
+  },
+});
