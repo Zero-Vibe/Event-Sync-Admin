@@ -58,7 +58,6 @@ export const SessionShow = () => {
           label="End Time (UTC)"
           options={{ timeZone: "UTC" }}
         />
-        <TextField source="status" />
         <NumberField source="capacity" emptyText="Unlimited" />
         <ReferenceField reference="rooms" source="roomId">
           <TextField source="name" label="Room" emptyText="No room assigned" />

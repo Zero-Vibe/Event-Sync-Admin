@@ -24,9 +24,8 @@ export const RoomShow = () => (
           <ReferenceField source="eventId" reference="events">
             <TextField source="title" />
           </ReferenceField>
-          <TextField source="status" />
-          <DateField source="startTime" showTime />
-          <DateField source="endTime" showTime />
+          <DateField source="startTime" label="Start Time (UTC)" showTime />
+          <DateField source="endTime" label="End Time (UTC)" showTime />
         </Datagrid>
       </ArrayField>
     </SimpleShowLayout>

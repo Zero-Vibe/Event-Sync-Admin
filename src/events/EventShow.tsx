@@ -11,6 +11,8 @@ import {
   useRecordContext,
   TopToolbar,
   CreateButton,
+  ReferenceField,
+  FunctionField,
 } from "react-admin";
 
 const SessionEditButton = () => {
@@ -44,7 +46,6 @@ const SessionsList = () => {
         rowClick={(id) => `/sessions/${id}/show?eventId=${eventId}`}
       >
         <TextField source="title" />
-        <TextField source="status" />
         <DateField
           source="startTime"
           showTime
@@ -86,7 +87,15 @@ export const EventShow = () => (
         options={{ timeZone: "UTC" }}
       />
       <TextField source="location" />
-      <TextField source="createdBy.name" label="Created by" />
+      <ReferenceField
+        reference="users"
+        source="createdBy.id"
+        label="Created By"
+      >
+        <FunctionField
+          render={(record) => `${record.name} (${record.email})`}
+        />
+      </ReferenceField>{" "}
     </SimpleShowLayout>
     <SessionsList />
   </Show>

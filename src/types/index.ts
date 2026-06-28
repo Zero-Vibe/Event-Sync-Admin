@@ -25,7 +25,6 @@ export interface Session {
   startTime: Date;
   endTime: Date;
   capacity: number;
-  status: SessionStatus;
   speakers: Speaker[];
 }
 
@@ -60,7 +59,6 @@ export interface Question {
   createdAt: Date;
 }
 
-type SessionStatus = "PUBLISHED" | "LIVE" | "ENDED";
 type LinkPlatform =
   | "TWITTER"
   | "LINKEDIN"
