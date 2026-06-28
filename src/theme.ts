@@ -2,7 +2,7 @@ import { createTheme, alpha } from "@mui/material/styles";
 
 const sharedConfig = {
   typography: {
-    fontFamily: '"Inter", sans-serif',
+    fontFamily: '"Inter", ui-sans-serif, system-ui, sans-serif',
     button: {
       textTransform: "none" as const,
     },
@@ -21,6 +21,7 @@ const sharedConfig = {
           color: theme.palette.text.primary,
           WebkitFontSmoothing: "antialiased",
           MozOsxFontSmoothing: "grayscale",
+          fontFeatureSettings: '"cv02", "cv03", "cv04", "cv11"',
         }),
         "*": {
           boxSizing: "border-box",
@@ -51,7 +52,7 @@ const sharedConfig = {
     },
     MuiButton: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           fontWeight: 500,
           borderRadius: 6,
           minHeight: 32,
@@ -62,12 +63,20 @@ const sharedConfig = {
           "&:hover": {
             opacity: 0.8,
           },
-        },
+        }),
         sizeLarge: {
           minHeight: 36,
           padding: "8px 16px",
           fontSize: "0.875rem",
         },
+        containedPrimary: ({ theme }) => ({
+          backgroundColor: theme.palette.text.primary,
+          color: theme.palette.background.default,
+          "&:hover": {
+            backgroundColor: theme.palette.text.primary,
+            opacity: 0.8,
+          },
+        }),
       },
     },
     MuiOutlinedInput: {
@@ -75,6 +84,7 @@ const sharedConfig = {
         root: ({ theme }) => ({
           borderRadius: 6,
           minHeight: 36,
+          fontSize: "0.875rem",
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
             borderColor: theme.palette.text.primary,
             borderWidth: 2,
@@ -85,7 +95,6 @@ const sharedConfig = {
         }),
         input: {
           padding: "8px 12px",
-          fontSize: "0.875rem",
         },
       },
     },
@@ -116,9 +125,11 @@ const sharedConfig = {
         root: ({ theme }) => ({
           "& .MuiTableCell-head": {
             fontWeight: 600,
-            fontSize: "0.8125rem",
+            fontSize: "0.75rem",
+            textTransform: "uppercase",
+            letterSpacing: "0.05em",
             color: theme.palette.text.secondary,
-            backgroundColor: theme.palette.action.hover,
+            backgroundColor: alpha(theme.palette.action.hover, 0.5),
           },
         }),
       },
@@ -126,7 +137,7 @@ const sharedConfig = {
     MuiTableCell: {
       styleOverrides: {
         root: ({ theme }) => ({
-          borderBottomColor: theme.palette.divider,
+          borderBottomColor: alpha(theme.palette.divider, 0.6),
           padding: "12px 16px",
           fontSize: "0.875rem",
         }),
@@ -170,6 +181,25 @@ const sharedConfig = {
         },
       },
     },
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          borderRadius: 9999,
+          fontWeight: 500,
+          fontSize: "0.75rem",
+          height: 24,
+        },
+        filledSuccess: ({ theme }) => ({
+          backgroundColor: alpha(theme.palette.success.main, 0.12),
+          color: theme.palette.success.main,
+          border: `1px solid ${alpha(theme.palette.success.main, 0.4)}`,
+        }),
+        outlined: ({ theme }) => ({
+          borderColor: alpha(theme.palette.divider, 0.6),
+          color: theme.palette.text.secondary,
+        }),
+      },
+    },
     RaToolbar: {
       styleOverrides: {
         root: {
@@ -187,6 +217,8 @@ const sharedConfig = {
   },
 };
 
+const liveGreen = "#22c55e";
+
 export const theme = createTheme({
   ...sharedConfig,
   palette: {
@@ -202,6 +234,10 @@ export const theme = createTheme({
     primary: {
       main: "#1e1e1e",
       contrastText: "#fcfcfc",
+    },
+    success: {
+      main: liveGreen,
+      contrastText: "#1e1e1e",
     },
     divider: "#e0e0e0",
     error: {
@@ -227,6 +263,10 @@ export const darkTheme = createTheme({
     },
     primary: {
       main: "#f7f7f7",
+      contrastText: "#242424",
+    },
+    success: {
+      main: "#4ade80",
       contrastText: "#242424",
     },
     divider: "#ffffff1a",
