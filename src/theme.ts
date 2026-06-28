@@ -1,6 +1,19 @@
 import { createTheme } from "@mui/material/styles";
 
+const sharedConfig = {
+  typography: {
+    fontFamily: '"Inter", sans-serif',
+    button: {
+      textTransform: "none" as const,
+    },
+  },
+  shape: {
+    borderRadius: 10,
+  },
+};
+
 export const theme = createTheme({
+  ...sharedConfig,
   palette: {
     mode: "light",
     background: {
@@ -26,6 +39,7 @@ export const theme = createTheme({
 });
 
 export const darkTheme = createTheme({
+  ...sharedConfig,
   palette: {
     mode: "dark",
     background: {
