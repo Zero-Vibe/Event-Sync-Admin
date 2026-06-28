@@ -34,6 +34,43 @@ const sharedConfig = {
         },
       },
     },
+    MuiButton: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          fontWeight: 500,
+          borderRadius: 6,
+          padding: "6px 16px",
+          fontSize: "0.8125rem",
+          transition: "opacity 0.15s ease-in-out",
+          "&:hover": {
+            opacity: 0.8,
+          },
+        }),
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          borderRadius: 6,
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: theme.palette.text.primary,
+            borderWidth: 1,
+          },
+        }),
+        notchedOutline: ({ theme }) => ({
+          borderColor: theme.palette.divider,
+        }),
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          "&.Mui-focused": {
+            color: theme.palette.text.primary,
+          },
+        }),
+      },
+    },
   },
 };
 
