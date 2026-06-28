@@ -11,8 +11,10 @@ import {
   useRecordContext,
   TopToolbar,
   CreateButton,
+  FunctionField,
 } from "react-admin";
-import { Box, Typography } from "@mui/material";
+import { SectionBox, SectionHeader } from "../components/SectionBox";
+import { StatusBadge } from "../components/StatusBadge";
 
 const SessionEditButton = () => {
   const record = useRecordContext();
@@ -38,14 +40,17 @@ const SessionsList = () => {
       queryOptions={{ meta: { eventId } }}
       actions={<SessionListActions eventId={eventId} />}
       title={false}
-      empty={false} // just to make the working create button in topBar
+      empty={false}
     >
       <Datagrid
         bulkActionButtons={false}
         rowClick={(id) => `/sessions/${id}/show?eventId=${eventId}`}
       >
         <TextField source="title" />
-        <TextField source="status" />
+        <FunctionField
+          label="Status"
+          render={(record) => <StatusBadge status={record.status} />}
+        />
         <DateField
           source="startTime"
           showTime
@@ -89,11 +94,9 @@ export const EventShow = () => (
       <TextField source="location" />
       <TextField source="createdBy.name" label="Created by" />
     </SimpleShowLayout>
-    <Box sx={{ px: 2, pb: 2, pt: 1 }}>
-      <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
-        Sessions
-      </Typography>
+    <SectionBox>
+      <SectionHeader title="Sessions" />
       <SessionsList />
-    </Box>
+    </SectionBox>
   </Show>
 );

@@ -7,21 +7,27 @@ import {
   UrlField,
   FunctionField,
 } from "react-admin";
-import { Box } from "@mui/material";
+import { Avatar } from "@mui/material";
 
 export const SpeakerShow = () => (
   <Show>
     <SimpleShowLayout>
       <FunctionField
-        label="Picture"
+        label="Photo"
         render={(record) =>
           record.base64Picture ? (
-            <Box
-              component="img"
+            <Avatar
               src={record.base64Picture}
-              sx={{ maxWidth: 200, borderRadius: 1.5 }}
+              alt={`${record.firstName} ${record.lastName}`}
+              sx={{ width: 80, height: 80 }}
             />
-          ) : null
+          ) : (
+            <Avatar
+              sx={{ width: 80, height: 80, fontSize: "1.5rem", bgcolor: "action.hover", color: "text.secondary" }}
+            >
+              {record.firstName?.[0]}{record.lastName?.[0]}
+            </Avatar>
+          )
         }
       />
       <TextField source="id" />

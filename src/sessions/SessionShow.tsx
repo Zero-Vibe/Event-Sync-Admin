@@ -11,10 +11,12 @@ import {
   Title,
   TopToolbar,
   EditButton,
+  FunctionField,
 } from "react-admin";
-import { Box, Typography } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
 import { QuestionsList } from "../questions";
+import { StatusBadge } from "../components/StatusBadge";
+import { SectionBox, SectionHeader } from "../components/SectionBox";
 
 const SessionTitle = () => {
   const { record } = useShowContext();
@@ -46,6 +48,10 @@ export const SessionShow = () => {
       <SimpleShowLayout>
         <TextField source="title" />
         <TextField source="id" />
+        <FunctionField
+          label="Status"
+          render={(record) => <StatusBadge status={record.status} />}
+        />
         <TextField source="description" />
         <DateField
           source="startTime"
@@ -59,7 +65,6 @@ export const SessionShow = () => {
           label="End Time (UTC)"
           options={{ timeZone: "UTC" }}
         />
-        <TextField source="status" />
         <NumberField source="capacity" emptyText="Unlimited" />
         <ReferenceField reference="rooms" source="roomId">
           <TextField source="name" label="Room" emptyText="No room assigned" />
@@ -75,12 +80,10 @@ export const SessionShow = () => {
           </Datagrid>
         </ArrayField>
       </SimpleShowLayout>
-      <Box sx={{ px: 2, pb: 2, pt: 1 }}>
-        <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
-          Questions
-        </Typography>
+      <SectionBox>
+        <SectionHeader title="Questions" />
         <QuestionsList />
-      </Box>
+      </SectionBox>
     </Show>
   );
 };
