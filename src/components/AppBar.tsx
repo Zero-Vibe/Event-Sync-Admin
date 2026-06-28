@@ -1,9 +1,9 @@
 import { alpha } from "@mui/material/styles";
-import { AppBar } from "react-admin";
+import { AppBar as RAAppBar } from "react-admin";
 import { Typography } from "@mui/material";
 
-export const MyAppBar = () => (
-  <AppBar
+export const AppBar = () => (
+  <RAAppBar
     sx={(theme) => ({
       borderBottom: `1px solid ${alpha(theme.palette.divider, 0.6)}`,
       backgroundColor: `${theme.palette.background.default}cc`,
@@ -25,5 +25,5 @@ export const MyAppBar = () => (
     })}
   >
     <Typography variant="body1">EventSync</Typography>
-  </AppBar>
+  </RAAppBar>
 );

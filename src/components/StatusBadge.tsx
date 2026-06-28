@@ -1,7 +1,7 @@
 import { Chip, keyframes } from "@mui/material";
-import { alpha, styled } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 
-export type SessionStatus = "PUBLISHED" | "LIVE" | "ENDED";
+type ComputedStatus = "UPCOMING" | "LIVE" | "ENDED";
 
 const pulse = keyframes`
   0%, 100% { opacity: 1; }
@@ -18,16 +18,33 @@ const LiveDot = styled("span")(({ theme }) => ({
 }));
 
 const statusConfig: Record<
-  SessionStatus,
+  ComputedStatus,
   { label: string; color: "success" | "default" | "error"; variant: "filled" | "outlined" }
 > = {
   LIVE: { label: "Live", color: "success", variant: "filled" },
   ENDED: { label: "Ended", color: "default", variant: "outlined" },
-  PUBLISHED: { label: "Upcoming", color: "default", variant: "outlined" },
+  UPCOMING: { label: "Upcoming", color: "default", variant: "outlined" },
 };
 
-export const StatusBadge = ({ status }: { status: SessionStatus }) => {
-  const config = statusConfig[status] ?? statusConfig.PUBLISHED;
+function computeStatus(startTime: string, endTime: string): ComputedStatus {
+  const now = new Date();
+  const start = new Date(startTime);
+  const end = new Date(endTime);
+
+  if (now < start) return "UPCOMING";
+  if (now >= start && now < end) return "LIVE";
+  return "ENDED";
+}
+
+export const StatusBadge = ({
+  startTime,
+  endTime,
+}: {
+  startTime: string;
+  endTime: string;
+}) => {
+  const status = computeStatus(startTime, endTime);
+  const config = statusConfig[status];
 
   if (status === "LIVE") {
     return (

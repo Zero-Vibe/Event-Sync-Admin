@@ -35,7 +35,7 @@ export const RoomShow = () => (
             </ReferenceField>
             <FunctionField
               label="Status"
-              render={(record) => <StatusBadge status={record.status} />}
+              render={(record) => <StatusBadge startTime={record.startTime} endTime={record.endTime} />}
             />
             <DateField source="startTime" showTime />
             <DateField source="endTime" showTime />

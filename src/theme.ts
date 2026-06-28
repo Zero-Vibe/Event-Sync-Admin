@@ -70,10 +70,10 @@ const sharedConfig = {
           fontSize: "0.875rem",
         },
         containedPrimary: ({ theme }) => ({
-          backgroundColor: theme.palette.text.primary,
-          color: theme.palette.background.default,
+          backgroundColor: theme.palette.primary.main,
+          color: theme.palette.primary.contrastText,
           "&:hover": {
-            backgroundColor: theme.palette.text.primary,
+            backgroundColor: theme.palette.primary.main,
             opacity: 0.8,
           },
         }),
@@ -94,7 +94,7 @@ const sharedConfig = {
           borderColor: theme.palette.divider,
         }),
         input: {
-          padding: "8px 12px",
+          padding: "10px 12px",
         },
       },
     },

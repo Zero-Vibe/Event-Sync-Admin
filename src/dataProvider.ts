@@ -9,13 +9,13 @@ import {
   userProvider,
 } from "./dataProviders/dataProviders";
 
-const dataProviders: { dataProvider: DataProvider; ressources: string[] }[] = [
-  { dataProvider: roomProvider, ressources: ["rooms"] },
-  { dataProvider: sessionProvider, ressources: ["sessions"] },
-  { dataProvider: questionProvider, ressources: ["questions"] },
-  { dataProvider: eventProvider, ressources: ["events"] },
-  { dataProvider: speakerProvider, ressources: ["speakers"] },
-  { dataProvider: userProvider, ressources: ["users"] },
+const dataProviders: { dataProvider: DataProvider; resources: string[] }[] = [
+  { dataProvider: roomProvider, resources: ["rooms"] },
+  { dataProvider: sessionProvider, resources: ["sessions"] },
+  { dataProvider: questionProvider, resources: ["questions"] },
+  { dataProvider: eventProvider, resources: ["events"] },
+  { dataProvider: speakerProvider, resources: ["speakers"] },
+  { dataProvider: userProvider, resources: ["users"] },
 ];
 
 const baseDataProvider = jsonServerProvider(
@@ -23,9 +23,9 @@ const baseDataProvider = jsonServerProvider(
 );
 
 export const dataProvider: DataProvider = combineDataProviders(
-  (ressource: string) => {
+  (resource: string) => {
     return (
-      dataProviders.find((dp) => dp.ressources.includes(ressource))
+      dataProviders.find((dp) => dp.resources.includes(resource))
         ?.dataProvider || baseDataProvider
     );
   },

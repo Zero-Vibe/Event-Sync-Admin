@@ -1,11 +1,11 @@
 import type { ReactNode } from "react";
 import { Layout as RALayout, CheckForApplicationUpdate } from "react-admin";
-import { MyAppBar } from "./components/MyAppBar";
-import { MyMenu } from "./components/MyMenu";
-import { MySidebar } from "./components/MySidebar";
+import { AppBar } from "./components/AppBar";
+import { Menu } from "./components/Menu";
+import { Sidebar } from "./components/Sidebar";
 
 export const Layout = ({ children }: { children: ReactNode }) => (
-  <RALayout appBar={MyAppBar} menu={MyMenu} sidebar={MySidebar}>
+  <RALayout appBar={AppBar} menu={Menu} sidebar={Sidebar}>
     {children}
     <CheckForApplicationUpdate />
   </RALayout>

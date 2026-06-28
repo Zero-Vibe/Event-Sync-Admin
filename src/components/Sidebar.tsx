@@ -1,7 +1,8 @@
-import { Sidebar } from "react-admin";
+import type { ReactNode } from "react";
+import { Sidebar as RASidebar } from "react-admin";
 
-export const MySidebar = () => (
-  <Sidebar
+export const Sidebar = ({ children }: { children?: ReactNode }) => (
+  <RASidebar
     sx={(theme) => ({
       "& .MuiDrawer-paper": {
         borderRight: `1px solid ${theme.palette.divider}`,
@@ -13,5 +14,7 @@ export const MySidebar = () => (
         mx: 1,
       },
     })}
-  />
+  >
+    {children}
+  </RASidebar>
 );

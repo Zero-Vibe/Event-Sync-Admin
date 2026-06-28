@@ -14,7 +14,7 @@ import {
   FunctionField,
 } from "react-admin";
 import { useSearchParams } from "react-router-dom";
-import { QuestionsList } from "../questions";
+import { QuestionList } from "../questions";
 import { StatusBadge } from "../components/StatusBadge";
 import { SectionBox, SectionHeader } from "../components/SectionBox";
 
@@ -50,7 +50,7 @@ export const SessionShow = () => {
         <TextField source="id" />
         <FunctionField
           label="Status"
-          render={(record) => <StatusBadge status={record.status} />}
+          render={(record) => <StatusBadge startTime={record.startTime} endTime={record.endTime} />}
         />
         <TextField source="description" />
         <DateField
@@ -82,7 +82,7 @@ export const SessionShow = () => {
       </SimpleShowLayout>
       <SectionBox>
         <SectionHeader title="Questions" />
-        <QuestionsList />
+        <QuestionList />
       </SectionBox>
     </Show>
   );

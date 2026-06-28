@@ -10,7 +10,7 @@ import {
 } from "react-admin";
 import { useSearchParams } from "react-router-dom";
 
-export const QuestionsList = () => {
+export const QuestionList = () => {
   const { record } = useShowContext();
   const [searchParams] = useSearchParams();
   const eventId = searchParams.get("eventId");

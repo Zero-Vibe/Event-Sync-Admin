@@ -30,7 +30,7 @@ const SessionListActions = ({ eventId }: { eventId: string }) => (
   </TopToolbar>
 );
 
-const SessionsList = () => {
+const SessionList = () => {
   const { record } = useShowContext();
   if (!record) return null;
   const eventId = record.id;
@@ -49,7 +49,7 @@ const SessionsList = () => {
         <TextField source="title" />
         <FunctionField
           label="Status"
-          render={(record) => <StatusBadge status={record.status} />}
+          render={(record) => <StatusBadge startTime={record.startTime} endTime={record.endTime} />}
         />
         <DateField
           source="startTime"
@@ -96,7 +96,7 @@ export const EventShow = () => (
     </SimpleShowLayout>
     <SectionBox>
       <SectionHeader title="Sessions" />
-      <SessionsList />
+      <SessionList />
     </SectionBox>
   </Show>
 );

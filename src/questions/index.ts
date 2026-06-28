@@ -1,2 +1,2 @@
 export { QuestionCreate } from "./QuestionCreate";
-export { QuestionsList } from "./QuestionsList";
+export { QuestionList } from "./QuestionList";
