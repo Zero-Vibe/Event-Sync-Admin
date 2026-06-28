@@ -17,6 +17,8 @@ const AdminToggle = () => {
   if (!record) return null;
   return (
     <Switch
+      color="primary"
+      size="small"
       checked={record.admin}
       disabled={isLoading}
       onClick={(e) => e.stopPropagation()}
