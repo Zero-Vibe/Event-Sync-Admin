@@ -71,6 +71,36 @@ const sharedConfig = {
         }),
       },
     },
+    MuiTableHead: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          "& .MuiTableCell-head": {
+            fontWeight: 600,
+            fontSize: "0.8125rem",
+            color: theme.palette.text.secondary,
+            backgroundColor: theme.palette.action.hover,
+          },
+        }),
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          borderBottomColor: theme.palette.divider,
+          padding: "12px 16px",
+        }),
+      },
+    },
+    MuiTableRow: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          cursor: "pointer",
+          "&:hover": {
+            backgroundColor: theme.palette.action.hover,
+          },
+        }),
+      },
+    },
   },
 };
 
