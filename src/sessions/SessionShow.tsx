@@ -12,6 +12,7 @@ import {
   TopToolbar,
   EditButton,
 } from "react-admin";
+import { Box, Typography } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
 import { QuestionsList } from "../questions";
 
@@ -74,7 +75,12 @@ export const SessionShow = () => {
           </Datagrid>
         </ArrayField>
       </SimpleShowLayout>
-      <QuestionsList />
+      <Box sx={{ px: 2, pb: 2, pt: 1 }}>
+        <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
+          Questions
+        </Typography>
+        <QuestionsList />
+      </Box>
     </Show>
   );
 };

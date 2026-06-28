@@ -12,6 +12,7 @@ import {
   TopToolbar,
   CreateButton,
 } from "react-admin";
+import { Box, Typography } from "@mui/material";
 
 const SessionEditButton = () => {
   const record = useRecordContext();
@@ -88,6 +89,11 @@ export const EventShow = () => (
       <TextField source="location" />
       <TextField source="createdBy.name" label="Created by" />
     </SimpleShowLayout>
-    <SessionsList />
+    <Box sx={{ px: 2, pb: 2, pt: 1 }}>
+      <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
+        Sessions
+      </Typography>
+      <SessionsList />
+    </Box>
   </Show>
 );
