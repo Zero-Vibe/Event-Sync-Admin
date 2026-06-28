@@ -33,7 +33,10 @@ export const SpeakerEdit = () => {
   };
 
   return (
-    <Edit transform={transformData}>
+    <Edit
+      transform={transformData}
+      sx={{ "& .RaEdit-main": { maxWidth: 1152, mx: "auto", px: { xs: 2, sm: 3, lg: 4 } } }}
+    >
       <SimpleForm>
         <TextInput source="firstName" validate={required()} fullWidth />
         <TextInput source="lastName" validate={required()} fullWidth />

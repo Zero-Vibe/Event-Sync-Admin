@@ -1,5 +1,6 @@
 import { alpha } from "@mui/material/styles";
 import { AppBar } from "react-admin";
+import { Typography } from "@mui/material";
 
 export const MyAppBar = () => (
   <AppBar
@@ -16,6 +17,13 @@ export const MyAppBar = () => (
         paddingLeft: { xs: 2, sm: 3, md: 4 },
         paddingRight: { xs: 2, sm: 3, md: 4 },
       },
+      "& .MuiTypography-root": {
+        fontWeight: 600,
+        fontSize: "0.875rem",
+        letterSpacing: "-0.025em",
+      },
     })}
-  />
+  >
+    <Typography variant="body1">EventSync</Typography>
+  </AppBar>
 );
