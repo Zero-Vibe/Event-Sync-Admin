@@ -101,6 +101,20 @@ const sharedConfig = {
         }),
       },
     },
+    RaToolbar: {
+      styleOverrides: {
+        root: {
+          padding: "12px 0",
+        },
+      },
+    },
+    RaSimpleForm: {
+      styleOverrides: {
+        root: {
+          maxWidth: "800px",
+        },
+      },
+    },
   },
 };
 
