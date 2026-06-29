@@ -37,8 +37,8 @@ export const RoomShow = () => (
               label="Status"
               render={(record) => <StatusBadge startTime={record.startTime} endTime={record.endTime} />}
             />
-            <DateField source="startTime" showTime />
-            <DateField source="endTime" showTime />
+            <DateField source="startTime" label="Start Time (UTC)" showTime />
+            <DateField source="endTime" label="End Time (UTC)" showTime />
           </Datagrid>
         </ArrayField>
       </CardContent>

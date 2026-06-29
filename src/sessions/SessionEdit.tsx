@@ -55,13 +55,22 @@ export const SessionEdit = () => {
         return transformOnSave(data);
       }}
       redirect={(resource, id) => `/${resource}/${id}/show?eventId=${eventId}`}
+      actions={false}
       sx={{ "& .RaEdit-main": { maxWidth: 1152, mx: "auto", px: { xs: 2, sm: 3, lg: 4 } } }}
     >
       <SimpleForm>
         <TextInput source="title" validate={required()} fullWidth />
         <TextInput source="description" multiline rows={4} fullWidth />
-        <DateTimeInput source="startTime" validate={required()} />
-        <DateTimeInput source="endTime" validate={required()} />
+        <DateTimeInput
+          source="startTime"
+          label="Start Time (UTC)"
+          validate={required()}
+        />
+        <DateTimeInput
+          source="endTime"
+          label="End Time (UTC)"
+          validate={required()}
+        />
         <ReferenceInput source="roomId" reference="rooms">
           <SelectInput optionText="name" />
         </ReferenceInput>

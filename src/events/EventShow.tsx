@@ -11,6 +11,7 @@ import {
   useRecordContext,
   TopToolbar,
   CreateButton,
+  ReferenceField,
   FunctionField,
 } from "react-admin";
 import { SectionBox, SectionHeader } from "../components/SectionBox";
@@ -49,7 +50,12 @@ const SessionList = () => {
         <TextField source="title" />
         <FunctionField
           label="Status"
-          render={(record) => <StatusBadge startTime={record.startTime} endTime={record.endTime} />}
+          render={(record) => (
+            <StatusBadge
+              startTime={record.startTime}
+              endTime={record.endTime}
+            />
+          )}
         />
         <DateField
           source="startTime"
@@ -92,7 +98,15 @@ export const EventShow = () => (
         options={{ timeZone: "UTC" }}
       />
       <TextField source="location" />
-      <TextField source="createdBy.name" label="Created by" />
+      <ReferenceField
+        reference="users"
+        source="createdBy.id"
+        label="Created By"
+      >
+        <FunctionField
+          render={(record) => `${record.name} (${record.email})`}
+        />
+      </ReferenceField>
     </SimpleShowLayout>
     <SectionBox>
       <SectionHeader title="Sessions" />
