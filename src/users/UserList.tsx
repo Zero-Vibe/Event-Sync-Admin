@@ -17,6 +17,8 @@ const AdminToggle = () => {
   if (!record) return null;
   return (
     <Switch
+      color="primary"
+      size="small"
       checked={record.admin}
       disabled={isLoading}
       onClick={(e) => e.stopPropagation()}
@@ -32,7 +34,12 @@ const AdminToggle = () => {
 };
 
 export const UserList = () => (
-  <List>
+  <List
+    sx={{
+      "& .RaList-main": { maxWidth: 1152, mx: "auto", px: { xs: 2, sm: 3, lg: 4 } },
+      "& .RaList-content": { borderRadius: 3, overflow: "hidden" },
+    }}
+  >
     <Datagrid rowClick="show" bulkActionButtons={false}>
       <TextField source="name" />
       <TextField source="email" />

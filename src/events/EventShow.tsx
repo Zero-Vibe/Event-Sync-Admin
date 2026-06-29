@@ -14,6 +14,8 @@ import {
   ReferenceField,
   FunctionField,
 } from "react-admin";
+import { SectionBox, SectionHeader } from "../components/SectionBox";
+import { StatusBadge } from "../components/StatusBadge";
 
 const SessionEditButton = () => {
   const record = useRecordContext();
@@ -29,7 +31,7 @@ const SessionListActions = ({ eventId }: { eventId: string }) => (
   </TopToolbar>
 );
 
-const SessionsList = () => {
+const SessionList = () => {
   const { record } = useShowContext();
   if (!record) return null;
   const eventId = record.id;
@@ -39,13 +41,22 @@ const SessionsList = () => {
       queryOptions={{ meta: { eventId } }}
       actions={<SessionListActions eventId={eventId} />}
       title={false}
-      empty={false} // just to make the working create button in topBar
+      empty={false}
     >
       <Datagrid
         bulkActionButtons={false}
         rowClick={(id) => `/sessions/${id}/show?eventId=${eventId}`}
       >
         <TextField source="title" />
+        <FunctionField
+          label="Status"
+          render={(record) => (
+            <StatusBadge
+              startTime={record.startTime}
+              endTime={record.endTime}
+            />
+          )}
+        />
         <DateField
           source="startTime"
           showTime
@@ -95,8 +106,11 @@ export const EventShow = () => (
         <FunctionField
           render={(record) => `${record.name} (${record.email})`}
         />
-      </ReferenceField>{" "}
+      </ReferenceField>
     </SimpleShowLayout>
-    <SessionsList />
+    <SectionBox>
+      <SectionHeader title="Sessions" />
+      <SessionList />
+    </SectionBox>
   </Show>
 );

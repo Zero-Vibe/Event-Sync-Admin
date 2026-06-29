@@ -11,9 +11,12 @@ import {
   Title,
   TopToolbar,
   EditButton,
+  FunctionField,
 } from "react-admin";
 import { useSearchParams } from "react-router-dom";
-import { QuestionsList } from "../questions";
+import { QuestionList } from "../questions";
+import { StatusBadge } from "../components/StatusBadge";
+import { SectionBox, SectionHeader } from "../components/SectionBox";
 
 const SessionTitle = () => {
   const { record } = useShowContext();
@@ -45,6 +48,10 @@ export const SessionShow = () => {
       <SimpleShowLayout>
         <TextField source="title" />
         <TextField source="id" />
+        <FunctionField
+          label="Status"
+          render={(record) => <StatusBadge startTime={record.startTime} endTime={record.endTime} />}
+        />
         <TextField source="description" />
         <DateField
           source="startTime"
@@ -73,7 +80,10 @@ export const SessionShow = () => {
           </Datagrid>
         </ArrayField>
       </SimpleShowLayout>
-      <QuestionsList />
+      <SectionBox>
+        <SectionHeader title="Questions" />
+        <QuestionList />
+      </SectionBox>
     </Show>
   );
 };

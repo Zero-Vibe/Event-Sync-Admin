@@ -56,6 +56,7 @@ export const SessionEdit = () => {
       }}
       redirect={(resource, id) => `/${resource}/${id}/show?eventId=${eventId}`}
       actions={false}
+      sx={{ "& .RaEdit-main": { maxWidth: 1152, mx: "auto", px: { xs: 2, sm: 3, lg: 4 } } }}
     >
       <SimpleForm>
         <TextInput source="title" validate={required()} fullWidth />
