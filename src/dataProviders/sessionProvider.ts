@@ -42,7 +42,7 @@ export const sessionProvider: DataProvider = {
     const hasFilter = params.filter && Object.keys(params.filter).length > 0;
 
     const response = await fetchUtils.fetchJson(
-      `${API_URL}/events/${eventId}/${resource}?_start=${start}&_end=${end}&_sort=${field}&_order=${order}${hasFilter ? "&filter=" + JSON.stringify(params.filter) : ""}`,
+      `${API_URL}/events/${eventId}/${resource}?_start=${start}&_end=${end}&_sort=${field}&_order=${order}${hasFilter ? "&filter=" + encodeURIComponent(JSON.stringify(params.filter)) : ""}`,
     );
     return {
       data: response.json,
