@@ -10,7 +10,7 @@ export const authProvider: AuthProvider = {
     username: string;
     password: string;
   }): Promise<void> {
-    const res = await fetch(`${AUTH_API_URL}/login`, {
+    const res = await fetch(`${AUTH_API_URL}/admin/login`, {
       method: "POST",
       headers: new Headers({ "Content-Type": "application/json" }),
       body: JSON.stringify({ email: username, password }),
@@ -26,7 +26,7 @@ export const authProvider: AuthProvider = {
     return Promise.resolve("/login");
   },
   checkAuth: async function () {
-    const res = await fetch(`${AUTH_API_URL}/authStatus`, {
+    const res = await fetch(`${AUTH_API_URL}/admin/authStatus`, {
       method: "POST",
       headers: new Headers({
         "Content-Type": "application/json",
