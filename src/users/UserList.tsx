@@ -47,7 +47,7 @@ export const UserList = () => (
     <Datagrid rowClick="show" bulkActionButtons={false}>
       <TextField source="name" />
       <TextField source="email" />
-      <BooleanField source="admin" label="Admin" />
+      <BooleanField source="admin" sortBy="isAdmin" label="Admin" />
       <DateField
         source="joinDate"
         showTime
