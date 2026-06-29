@@ -3,6 +3,7 @@ import { Layout } from "./Layout";
 import { dataProvider } from "./dataProvider";
 import { authProvider } from "./authProvider";
 import { theme, darkTheme } from "./theme";
+import { Dashboard } from "./dashboard/Dashboard";
 import { EventList, EventShow, EventEdit, EventCreate } from "./events";
 import { RoomList, RoomShow, RoomEdit, RoomCreate } from "./rooms";
 import { SessionShow, SessionEdit, SessionCreate } from "./sessions";
@@ -17,6 +18,7 @@ import { UserList, UserShow, UserEdit, UserCreate } from "./users";
 export const App = () => (
   <Admin
     layout={Layout}
+    dashboard={Dashboard}
     dataProvider={dataProvider}
     authProvider={authProvider}
     theme={theme}
