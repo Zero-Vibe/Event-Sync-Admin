@@ -19,7 +19,11 @@ const LiveDot = styled("span")(({ theme }) => ({
 
 const statusConfig: Record<
   ComputedStatus,
-  { label: string; color: "success" | "default" | "error"; variant: "filled" | "outlined" }
+  {
+    label: string;
+    color: "success" | "default" | "error";
+    variant: "filled" | "outlined";
+  }
 > = {
   LIVE: { label: "Live", color: "success", variant: "filled" },
   ENDED: { label: "Ended", color: "default", variant: "outlined" },
@@ -58,11 +62,5 @@ export const StatusBadge = ({
     );
   }
 
-  return (
-    <Chip
-      variant="outlined"
-      size="small"
-      label={config.label}
-    />
-  );
+  return <Chip variant="outlined" size="small" label={config.label} />;
 };

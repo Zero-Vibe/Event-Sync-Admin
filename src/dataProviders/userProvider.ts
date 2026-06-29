@@ -88,7 +88,10 @@ export const userProvider: DataProvider = {
       total: parseInt(response.headers.get("X-Total-Count") || "0", 10),
     };
   },
-  create: async function (resource: string, params: { data: Record<string, unknown> }) {
+  create: async function (
+    resource: string,
+    params: { data: Record<string, unknown> },
+  ) {
     const response = await fetch(`${API_URL}/${resource}`, {
       method: "POST",
       body: JSON.stringify(params.data),

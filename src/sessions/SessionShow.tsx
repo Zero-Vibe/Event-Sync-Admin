@@ -50,7 +50,12 @@ export const SessionShow = () => {
         <TextField source="id" />
         <FunctionField
           label="Status"
-          render={(record) => <StatusBadge startTime={record.startTime} endTime={record.endTime} />}
+          render={(record) => (
+            <StatusBadge
+              startTime={record.startTime}
+              endTime={record.endTime}
+            />
+          )}
         />
         <TextField source="description" />
         <DateField

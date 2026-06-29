@@ -2,7 +2,13 @@ import { Create, SimpleForm, TextInput, required } from "react-admin";
 
 export const UserCreate = () => (
   <Create
-    sx={{ "& .RaCreate-main": { maxWidth: 1152, mx: "auto", px: { xs: 2, sm: 3, lg: 4 } } }}
+    sx={{
+      "& .RaCreate-main": {
+        maxWidth: 1152,
+        mx: "auto",
+        px: { xs: 2, sm: 3, lg: 4 },
+      },
+    }}
   >
     <SimpleForm>
       <TextInput source="email" validate={required()} fullWidth />

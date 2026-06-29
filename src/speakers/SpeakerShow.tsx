@@ -23,9 +23,16 @@ export const SpeakerShow = () => (
             />
           ) : (
             <Avatar
-              sx={{ width: 80, height: 80, fontSize: "1.5rem", bgcolor: "action.hover", color: "text.secondary" }}
+              sx={{
+                width: 80,
+                height: 80,
+                fontSize: "1.5rem",
+                bgcolor: "action.hover",
+                color: "text.secondary",
+              }}
             >
-              {record.firstName?.[0]}{record.lastName?.[0]}
+              {record.firstName?.[0]}
+              {record.lastName?.[0]}
             </Avatar>
           )
         }
