@@ -43,7 +43,7 @@ export const userProvider: DataProvider = {
     const hasFilter = params.filter && Object.keys(params.filter).length > 0;
 
     const response = await fetchUtils.fetchJson(
-      `${API_URL}/${resource}?_start=${start}&_end=${end}&_sort=${field}&_order=${order}${hasFilter ? "&filter=" + JSON.stringify(params.filter) : ""}`,
+      `${API_URL}/${resource}?_start=${start}&_end=${end}&_sort=${field}&_order=${order}${hasFilter ? "&filter=" + encodeURIComponent(JSON.stringify(params.filter)) : ""}`,
       { headers: headers() },
     );
     return {

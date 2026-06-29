@@ -1,5 +1,11 @@
 import jsonServerProvider from "ra-data-json-server";
-import { DataProvider, UpdateManyParams, UpdateParams } from "react-admin";
+import {
+  DataProvider,
+  GetListParams,
+  QueryFunctionContext,
+  UpdateManyParams,
+  UpdateParams,
+} from "react-admin";
 
 const API_URL = import.meta.env.VITE_JSON_SERVER_URL;
 
@@ -14,6 +20,27 @@ function headers() {
 
 export const roomProvider: DataProvider = {
   ...baseDataProvider,
+  getList: async function (
+    resource: string,
+    params: GetListParams & QueryFunctionContext,
+  ) {
+    const { page, perPage } = params.pagination;
+    const start = (page - 1) * perPage;
+    const end = start + perPage;
+    const { field, order } = params.sort;
+    const hasFilter = params.filter && Object.keys(params.filter).length > 0;
+
+    const response = await fetch(
+      `${API_URL}/${resource}?_start=${start}&_end=${end}&_sort=${field}&_order=${order}${hasFilter ? "&filter=" + encodeURIComponent(JSON.stringify(params.filter)) : ""}`,
+      { headers: headers() },
+    );
+    if (!response.ok) {
+      throw new Error(`getList failed (${response.status})`);
+    }
+    const json = await response.json();
+    const total = parseInt(response.headers.get("X-Total-Count") || "0", 10);
+    return { data: json, total };
+  },
   create: async function (
     resource: string,
     params: { data: Record<string, unknown> },
