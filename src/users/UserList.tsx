@@ -36,7 +36,11 @@ const AdminToggle = () => {
 export const UserList = () => (
   <List
     sx={{
-      "& .RaList-main": { maxWidth: 1152, mx: "auto", px: { xs: 2, sm: 3, lg: 4 } },
+      "& .RaList-main": {
+        maxWidth: 1152,
+        mx: "auto",
+        px: { xs: 2, sm: 3, lg: 4 },
+      },
       "& .RaList-content": { borderRadius: 3, overflow: "hidden" },
     }}
   >

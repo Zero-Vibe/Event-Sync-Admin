@@ -18,7 +18,13 @@ const transformDate = (data: Record<string, unknown>) => {
 export const EventCreate = () => (
   <Create
     transform={transformDate}
-    sx={{ "& .RaCreate-main": { maxWidth: 1152, mx: "auto", px: { xs: 2, sm: 3, lg: 4 } } }}
+    sx={{
+      "& .RaCreate-main": {
+        maxWidth: 1152,
+        mx: "auto",
+        px: { xs: 2, sm: 3, lg: 4 },
+      },
+    }}
   >
     <SimpleForm>
       <TextInput source="title" validate={required()} fullWidth />

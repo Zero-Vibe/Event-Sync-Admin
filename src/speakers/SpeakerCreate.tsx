@@ -35,7 +35,13 @@ export const SpeakerCreate = () => {
   return (
     <Create
       transform={transformData}
-      sx={{ "& .RaCreate-main": { maxWidth: 1152, mx: "auto", px: { xs: 2, sm: 3, lg: 4 } } }}
+      sx={{
+        "& .RaCreate-main": {
+          maxWidth: 1152,
+          mx: "auto",
+          px: { xs: 2, sm: 3, lg: 4 },
+        },
+      }}
     >
       <SimpleForm>
         <TextInput source="firstName" validate={required()} fullWidth />
