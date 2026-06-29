@@ -21,6 +21,7 @@ export const App = () => (
     authProvider={authProvider}
     theme={theme}
     darkTheme={darkTheme}
+    defaultTheme="light"
     requireAuth
   >
     <Resource
